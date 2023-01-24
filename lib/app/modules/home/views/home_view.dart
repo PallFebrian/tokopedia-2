@@ -10,6 +10,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 import 'package:get/get.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
+import 'package:tokopedia/app/routes/app_pages.dart';
 import 'package:tokopedia/config/warna.dart';
 
 import '../controllers/home_controller.dart';
@@ -431,16 +432,19 @@ class HomeView extends GetView<HomeController> {
                 spacing: 3.5,
                 runSpacing: 1,
                 children: [
-                  produk(
-                      lebar,
-                      lebar * 0.42,
-                      tinggi,
-                      'assets/images/mouse4.png',
-                      'Rp 699.000',
-                      '12%',
-                      'Rp 790.000',
-                      'assets/images/mahkota.png',
-                      'Jakarta Pusat'),
+                  InkWell(
+                     onTap: () => Get.toNamed(Routes.DETAIL),
+                    child: produk(
+                        lebar,
+                        lebar * 0.42,
+                        tinggi,
+                        'assets/images/mouse4.png',
+                        'Rp 699.000',
+                        '12%',
+                        'Rp 790.000',
+                        'assets/images/mahkota.png',
+                        'Jakarta Pusat'),
+                  ),
                   produk(
                       lebar,
                       lebar * 0.42,
