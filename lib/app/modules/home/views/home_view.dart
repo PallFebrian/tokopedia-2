@@ -278,6 +278,221 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ),
                       ),
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(bottom: 12, left: 20),
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'Pilihan Promo Hari Ini',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(bottom: 12, right: 20),
+                              child: Text('Lihat Semua',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: bgHeader)),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin:
+                            EdgeInsets.only(bottom: 20,),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                               SizedBox(width: 25,),
+                              Row(
+                                children: [
+                                  Banner(
+                                    gambar: 'assets/images/banner1.png',
+                                  ),
+                                  Banner(
+                                    gambar: 'assets/images/banner2.png',
+                                  ),
+                                  Banner(
+                                    gambar: 'assets/images/Banner3.jpeg',
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 20),
+                        width: lebar,
+                        height: 1,
+                        color: abu,
+                      ),
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(bottom: 12, left: 20),
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'Kejar Diskon Spesial',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(bottom: 12, right: 20),
+                              child: Text('Lihat Semua',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: bgHeader)),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin:
+                            EdgeInsets.only(bottom: 20, ),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(width: 25,),
+                                  Card(
+                                      nama: 'Logitech G603 Lightspeed ...',
+                                      gambar: 'assets/images/masker.png',
+                                      daerah: 'Kab. Bandung',
+                                      diskon: '92%',
+                                      harga: 'Rp 1.000',
+                                      potongan: 'Rp 12.546',
+                                      status: 'Segera Habis'),
+                                  Card(
+                                      nama: 'Logitech G203 Mouse Gaming',
+                                      gambar: 'assets/images/colokan.png',
+                                      daerah: 'Jakarta Timur',
+                                      diskon: '6%',
+                                      harga: 'Rp 103.000',
+                                      potongan: 'Rp 109.900',
+                                      status: 'Tersedia'),
+                                  Card(
+                                      nama: 'Logitech G240 Cloth Gaming',
+                                      gambar: 'assets/images/colokan.png',
+                                      daerah: 'Jakarta Timur',
+                                      diskon: '6%',
+                                      harga: 'Rp 103.000',
+                                      potongan: 'Rp 109.900',
+                                      status: 'Tersedia')
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 30,top: 30),
+                        width: lebar,
+                        height: 8,
+                        color: abu,
+                      ),
+                       Container(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    pilihan(
+                        lebar, pilihan1, pilihan2, 'For rizqi', Colors.white),
+                    pilihan(lebar, pilihan3, pilihan4, 'Special Discount',
+                        Colors.transparent),
+                    pilihan(lebar, pilihan5, pilihan6, 'Aktivitasmu',
+                        Colors.transparent),
+                    pilihan(lebar, pilihan7, pilihan8, 'Kesukaanmu',
+                        Colors.transparent),
+                  ],
+                ),
+              ),
+            ),
+             Container(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Wrap(
+                spacing: 3.5,
+                runSpacing: 1,
+                children: [
+                  produk(
+                      lebar,
+                      lebar * 0.42,
+                      tinggi,
+                      'assets/images/mouse4.png',
+                      'Rp 699.000',
+                      '12%',
+                      'Rp 790.000',
+                      'assets/images/mahkota.png',
+                      'Jakarta Pusat'),
+                  produk(
+                      lebar,
+                      lebar * 0.42,
+                      tinggi,
+                      'assets/images/monitor.png',
+                      'Rp 5.949.900',
+                      '44%',
+                      'Rp 1.090.000',
+                      'assets/images/mahkota.png',
+                      'Kota Depok'),
+                  produk(
+                      lebar,
+                      lebar * 0.42,
+                      tinggi,
+                      'assets/images/stopkontak.png',
+                      'Rp 3.750',
+                      '44%',
+                      'Rp 1.090.000',
+                      'assets/images/mahkota.png',
+                      'Kab. Tangerang'),
+                  produk(
+                      lebar,
+                      lebar * 0.42,
+                      tinggi,
+                      'assets/images/mouse5.png',
+                      'Rp 239.000',
+                      '32%',
+                      'Rp 349.000',
+                      'assets/images/mahkota.png',
+                      'Kab. Bandung'),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: tinggi * 0.02,
+            ),
+            Container(
+              width: lebar,
+              height: 40,
+              margin: EdgeInsets.symmetric(horizontal: 15),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(width: 1, color: abu)),
+              child: Text(
+                'Lihat Selebihnya',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+            ),
+            SizedBox(
+              height: tinggi * 0.02,
+            ),
 
                     ],
                   ),
@@ -319,6 +534,41 @@ Widget CustomIcon({icon, text}) {
     ),
   );
 }
+
+// Widget Pilihan({warna1,warna2}){
+  
+// }
+
+Widget pilihan(lebar, warna, warna2, judul, warna3) {
+  return Container(
+    width: lebar * 0.3,
+    height: 66,
+    padding: EdgeInsets.all(12),
+    margin: EdgeInsets.only(right: 12),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(6),
+      gradient: LinearGradient(
+        begin: Alignment.bottomCenter,
+        end: Alignment.topRight,
+        colors: [warna, warna2],
+      ),
+    ),
+    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Container(
+        width: 25,
+        height: 3,
+        margin: EdgeInsets.only(bottom: 5),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(2), color: warna3),
+      ),
+      Text(
+        judul,
+        style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
+      )
+    ]),
+  );
+}
+
 
 Widget KejarDiskonCard(
     {gambar,
@@ -437,38 +687,264 @@ Widget KejarDiskonCard(
   );
 }
 
+Widget Banner({
+  gambar,
+}) {
+  return Container(
+    margin: EdgeInsets.only(right: 15),
+    width: 146,
+    height: 276,
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8), color: Colors.white),
+    child: Column(
+      children: [
+        Container(
+          width: 146,
+          height: 276,
+          child: Image.asset(gambar),
+        ),
+      ],
+    ),
+  );
+}
 
-// Container(
-                              //     child: CarouselSlider(
-                              //   options: CarouselOptions(
-                              //     // height: 130,
-                              //     // autoPlay: true,
-                              //     autoPlayCurve: Curves.easeInOutQuart,
-                              //   ),
-                              //   items: [
-                              //     KejarDiskonCard(
-                              //         gambar: 'assets/images/masker.png',
-                              //         daerah: 'Kab. Bandung',
-                              //         diskon: '92%',
-                              //         harga: 'Rp 1.000',
-                              //         totalPersen: 100,
-                              //         currentPersen: 80,
-                              //         potongan: 'Rp 12.546',
-                              //         status: 'Segera Habis'),
-                              //     KejarDiskonCard(
-                              //         gambar: 'assets/images/colokan.png',
-                              //         daerah: 'Jakarta Timur',
-                              //         diskon: '6%',
-                              //         harga: 'Rp 103.000',
-                              //         totalPersen: 100,
-                              //         currentPersen: 35,
-                              //         potongan: 'Rp 109.900',
-                              //         status: 'Tersedia')
-                              //   ].map((i) {
-                              //     return Builder(
-                              //       builder: (BuildContext context) {
-                              //         return i;
-                              //       },
-                              //     );
-                              //   }).toList(),
-                              // )),
+Widget Card({
+  nama,
+  gambar,
+  harga,
+  diskon,
+  potongan,
+  daerah,
+  status,
+}) {
+  return Container(
+    margin: EdgeInsets.only(right: 15),
+    width: 146,
+    height: 276,
+    decoration: BoxDecoration(boxShadow: [
+      BoxShadow(color: abuText, blurRadius: 8, offset: Offset(0, 2))
+    ], borderRadius: BorderRadius.circular(8), color: Colors.white),
+    child: Column(
+      children: [
+        Container(
+          width: 146,
+          height: 146,
+          child: Image.asset(gambar),
+        ),
+        Container(
+          width: double.infinity,
+          padding: EdgeInsets.fromLTRB(10, 12, 10, 12),
+          child: Column(
+            children: [
+              Container(
+                // margin: EdgeInsets.only(bottom: 6),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  nama,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                ),
+              ),
+              Container(
+                // margin: EdgeInsets.only(bottom: 6),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  harga,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 6, top: 6),
+                child: Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(right: 6),
+                      width: 36,
+                      height: 20,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadiusDirectional.circular(2),
+                          color: merahTrans),
+                      child: Center(
+                        child: Text(
+                          diskon,
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: merah),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      child: Text(
+                        potongan,
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            decoration: TextDecoration.lineThrough,
+                            color: abuText),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 6),
+                child: Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(right: 2),
+                      child: Image.asset('assets/images/mahkota.png'),
+                    ),
+                    Container(
+                      child: Text(
+                        daerah,
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: abuText),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Text(status,
+                    style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w500,
+                        color: abuText)),
+              ),
+            ],
+          ),
+        )
+      ],
+    ),
+  );
+}
+
+Widget produk(lebar, double lebar2, tinggi, gambar, harga, diskonPercen,
+    jumlahDiskon, penjual, asal) {
+  return Container(
+    height: tinggi * 0.4,
+    width: lebar2,
+    margin: EdgeInsets.fromLTRB(0, 15, 12, 15),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(12),
+      boxShadow: [
+        BoxShadow(
+          color: abuText,
+          blurRadius: 8,
+          offset: Offset(0, 4),
+        )
+      ],
+    ),
+    child: Column(
+      children: [
+        Container(
+          width: lebar,
+          height: tinggi * 0.19,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(12),
+              topRight: Radius.circular(12),
+            ),
+            image: DecorationImage(
+                image: AssetImage(
+                  gambar,
+                ),
+                fit: BoxFit.cover),
+          ),
+        ),
+        Container(
+          width: lebar,
+          height: tinggi * 0.163,
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(12),
+              bottomRight: Radius.circular(12),
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                harga,
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                height: tinggi * 0.006,
+              ),
+              Row(
+                children: [
+                  Container(
+                    width: 30,
+                    height: 20,
+                    margin: EdgeInsets.only(right: 6),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(1),
+                      color: merahTrans,
+                    ),
+                    child: Text(
+                      diskonPercen,
+                      style: TextStyle(
+                          color: merah,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12),
+                    ),
+                  ),
+                  Text(
+                    jumlahDiskon,
+                    style: TextStyle(
+                        decoration: TextDecoration.lineThrough,
+                        fontSize: 12,
+                        color: abuText),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: tinggi * 0.006,
+              ),
+              Row(
+                children: [
+                  Image.asset(
+                    penjual,
+                    width: 15,
+                  ),
+                  Text(
+                    asal,
+                    style: TextStyle(
+                      color: abuText,
+                      fontSize: 13,
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: tinggi * 0.011,
+              ),
+              Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(right: 3),
+                    child: Icon(
+                      Icons.star,
+                      color: star,
+                      size: 14,
+                    ),
+                  ),
+                  Text(
+                    '4.8 | Terjual 312',
+                    style: TextStyle(color: abuText, fontSize: 13),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
