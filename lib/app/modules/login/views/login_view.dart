@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:tokopedia/app/controllers/auth_controller_controller.dart';
 import 'package:tokopedia/app/routes/app_pages.dart';
 import 'package:tokopedia/config/warna.dart';
 
@@ -10,6 +11,7 @@ import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
   final controller = Get.put(LoginController());
+  final authC = Get.put(AuthControllerController());
   @override
   Widget build(BuildContext context) {
     double tinggi = MediaQuery.of(context).size.height;
@@ -55,6 +57,7 @@ class LoginView extends GetView<LoginController> {
                             ),
                             CustomInput(
                                 label: 'Email Address',
+                                controller: controller.email,
                                 hint: 'Masukkan email',
                                 obscure: false),
                             SizedBox(
@@ -62,6 +65,7 @@ class LoginView extends GetView<LoginController> {
                             ),
                             CustomInput(
                               label: 'Password',
+                              controller: controller.password,
                               hint: 'Enter your password',
                               obscure: controller.visibilityPassword.value
                                   ? false
@@ -90,7 +94,7 @@ class LoginView extends GetView<LoginController> {
                             Container(
                               margin: EdgeInsets.only(top: 40),
                               child: InkWell(
-                                onTap: () => Get.toNamed(Routes.HOME),
+                                onTap: () => authC.login(controller.email.text, controller.password.text),
                                 child: Container(
                                   width: lebar,
                                   height: 55,

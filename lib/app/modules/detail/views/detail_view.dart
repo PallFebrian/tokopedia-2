@@ -627,6 +627,7 @@ class DetailView extends GetView<DetailController> {
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 15),
+                // ignore: prefer_const_constructors
                 child: Text(
                   'saya selalu tertarik dengan produk lokal, buat saya aroma nomor 2 karena subyektif, Kemasan nomor selanjutnya, tapi yang perlu di',
                   style: TextStyle(fontSize: 15),
@@ -636,6 +637,7 @@ class DetailView extends GetView<DetailController> {
                 height: tinggi * 0.01,
               ),
               Container(
+                alignment: Alignment.centerLeft,
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
                   'Baca Selengkapnya',
@@ -701,7 +703,7 @@ class DetailView extends GetView<DetailController> {
                   children: [
                     Row(
                       children: [
-                        Image.asset('assets/penjual.png'),
+                        Image.asset('assets/images/penjual1.png'),
                         Container(
                             width: 60,
                             height: 25,
@@ -867,7 +869,7 @@ Widget pembatas(lebar) {
   return Container(
     width: lebar,
     height: 8,
-    color: abuAbu,
+    color: abu,
   );
 }
 

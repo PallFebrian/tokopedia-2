@@ -7,10 +7,9 @@ class LoginController extends GetxController {
   final visibilityPassword = false.obs;
   changeEye() => visibilityPassword.toggle();
 
+  final count = 0.obs;
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
