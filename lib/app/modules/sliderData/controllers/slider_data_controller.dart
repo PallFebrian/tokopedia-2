@@ -1,15 +1,18 @@
-// ignore_for_file: unnecessary_overrides
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:tokopedia/app/controllers/slider_controller.dart';
 
-class HomeController extends GetxController {
-  //TODO: Implement HomeController
-
+class SliderDataController extends GetxController {
   final count = 0.obs;
-  TextEditingController signOut = TextEditingController();
+  var data;
+
   @override
   void onInit() {
+    data = SliderController().getData();
+    log('apaa');
+    print(data);
     super.onInit();
   }
 

@@ -3,13 +3,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:tokopedia/app/controllers/auth_controller_controller.dart';
 import 'package:tokopedia/app/routes/app_pages.dart';
 import 'package:tokopedia/config/warna.dart';
 
 import '../controllers/forgot_password_controller.dart';
 
 class ForgotPasswordView extends GetView<ForgotPasswordController> {
-  const ForgotPasswordView({Key? key}) : super(key: key);
+  // const ForgotPasswordView({Key? key}) : super(key: key);
+  final controller = Get.put(ForgotPasswordController());
+  final authControllerController = Get.put(AuthControllerController());
   @override
   Widget build(BuildContext context) {
     double tinggi = MediaQuery.of(context).size.height;
@@ -72,7 +75,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                           ),
                           Container(
                             child: TextFormField(
-                                // controller: controller,
+                                controller: controller.email,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   // labelText: customLabel,
@@ -112,7 +115,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                           ),
                           Container(
                             child: InkWell(
-                              onTap: () => Get.toNamed(Routes.CHECK_EMAIL),
+                              onTap: () => authControllerController.resetPassword(controller.email.text),
                               child: Container(
                                 margin: EdgeInsets.only(top: 50),
                                 width: lebar,

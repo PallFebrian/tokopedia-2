@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, non_constant_identifier_names, use_key_in_widget_constructors, unused_local_variable, annotate_overrides
 
+import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -57,7 +58,14 @@ class CheckEmailView extends GetView<CheckEmailController> {
                       ),
                       Container(
                         child: InkWell(
-                          // onTap: () => Get.toNamed(Routes.CHECK_EMAIL),
+                          onTap: () async { 
+                            await LaunchApp.openApp( 
+                              androidPackageName: 'com.google.android.gm', 
+                              iosUrlScheme: 'googlegmail://', 
+                              appStoreLink: 
+                                  'itms-apps://apps.apple.com/us/app/gmail-email-by-google/id422689480', 
+                            ); 
+                          },
                           child: Container(
                             margin: EdgeInsets.only(top: 50),
                             width: lebar * 0.4,
@@ -83,6 +91,7 @@ class CheckEmailView extends GetView<CheckEmailController> {
                       Container(
                         margin: EdgeInsets.only(top: 50),
                         child: InkWell(
+                          onTap: ()=> Get.toNamed('/login'),
                           child: Text(
                             'Skip, I`ll confirm later',
                             style: TextStyle(

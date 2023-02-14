@@ -1,13 +1,13 @@
-// ignore_for_file: unnecessary_overrides
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
-  //TODO: Implement HomeController
+class CreateSliderController extends GetxController {
+ final aktifasi = true.obs;
+  changeActivation() => aktifasi.toggle();
 
+  TextEditingController desc = TextEditingController();
+  TextEditingController gambar = TextEditingController();
   final count = 0.obs;
-  TextEditingController signOut = TextEditingController();
   @override
   void onInit() {
     super.onInit();

@@ -10,6 +10,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 import 'package:get/get.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
+import 'package:tokopedia/app/controllers/auth_controller_controller.dart';
 import 'package:tokopedia/app/routes/app_pages.dart';
 import 'package:tokopedia/config/warna.dart';
 
@@ -17,7 +18,7 @@ import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   final controller = Get.put(HomeController());
-
+  final authC = Get.put(AuthControllerController());
   @override
   Widget build(BuildContext context) {
     double tinggi = MediaQuery.of(context).size.height;
@@ -82,10 +83,13 @@ class HomeView extends GetView<HomeController> {
                               color: Colors.white,
                               size: 26,
                             ),
-                            Icon(
-                              CupertinoIcons.line_horizontal_3,
-                              color: Colors.white,
-                              size: 26,
+                            InkWell(
+                              onTap: () => authC.signOut(),
+                              child: Icon(
+                                CupertinoIcons.line_horizontal_3,
+                                color: Colors.white,
+                                size: 26,
+                              ),
                             ),
                           ],
                         ),

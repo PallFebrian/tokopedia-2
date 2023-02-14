@@ -1,13 +1,9 @@
-// ignore_for_file: unnecessary_overrides
-
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
-  //TODO: Implement HomeController
+class VerifikasiOTPController extends GetxController {
+  //TODO: Implement VerifikasiOTPController
 
   final count = 0.obs;
-  TextEditingController signOut = TextEditingController();
   @override
   void onInit() {
     super.onInit();

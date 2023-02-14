@@ -12,6 +12,12 @@ abstract class Routes {
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
   static const CHECK_EMAIL = _Paths.CHECK_EMAIL;
   static const DETAIL = _Paths.DETAIL;
+  static const LOGIN_PHONE_NUMBER = _Paths.LOGIN_PHONE_NUMBER;
+  static const VERIFIKASI_O_T_P = _Paths.VERIFIKASI_O_T_P;
+  static const HOME_ADMIN = _Paths.HOME_ADMIN;
+  static const SLIDER_DATA = _Paths.SLIDER_DATA;
+  static const UPDATE_DATA = _Paths.UPDATE_DATA;
+  static const CREATE_SLIDER = _Paths.CREATE_SLIDER;
 }
 
 abstract class _Paths {
@@ -23,4 +29,10 @@ abstract class _Paths {
   static const FORGOT_PASSWORD = '/forgot-password';
   static const CHECK_EMAIL = '/check-email';
   static const DETAIL = '/detail';
+  static const LOGIN_PHONE_NUMBER = '/login-phone-number';
+  static const VERIFIKASI_O_T_P = '/verifikasi-o-t-p';
+  static const HOME_ADMIN = '/home-admin';
+  static const SLIDER_DATA = '/slider-data';
+  static const UPDATE_DATA = '/update-data';
+  static const CREATE_SLIDER = '/create-slider';
 }
