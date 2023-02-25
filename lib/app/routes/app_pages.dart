@@ -4,6 +4,8 @@ import '../modules/SplashScreen/bindings/splash_screen_binding.dart';
 import '../modules/SplashScreen/views/splash_screen_view.dart';
 import '../modules/checkEmail/bindings/check_email_binding.dart';
 import '../modules/checkEmail/views/check_email_view.dart';
+import '../modules/createProduk/bindings/create_produk_binding.dart';
+import '../modules/createProduk/views/create_produk_view.dart';
 import '../modules/createSlider/bindings/create_slider_binding.dart';
 import '../modules/createSlider/views/create_slider_view.dart';
 import '../modules/detail/bindings/detail_binding.dart';
@@ -18,6 +20,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/loginPhoneNumber/bindings/login_phone_number_binding.dart';
 import '../modules/loginPhoneNumber/views/login_phone_number_view.dart';
+import '../modules/produk/bindings/produk_binding.dart';
+import '../modules/produk/views/produk_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/sliderData/bindings/slider_data_binding.dart';
@@ -97,8 +101,18 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CREATE_SLIDER,
-      page: () =>  CreateSliderView(),
+      page: () => CreateSliderView(),
       binding: CreateSliderBinding(),
+    ),
+    GetPage(
+      name: _Paths.CREATE_PRODUK,
+      page: () => const CreateProdukView(),
+      binding: CreateProdukBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUK,
+      page: () => const ProdukView(),
+      binding: ProdukBinding(),
     ),
   ];
 }

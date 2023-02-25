@@ -35,15 +35,15 @@ class SliderDataView extends GetView<SliderDataController> {
                               as Map<String, dynamic>)['deskSlider']),
                           subtitle: Text(
                             (listData[index].data()
-                                    as Map<String, dynamic>)['aktifSlider']
+                                    as Map<String, dynamic>)['activeSlider']
                                 .toString(),
                             style: TextStyle(
                                 fontSize: 16,
                                 color: (listData[index].data()
-                                        as Map<String, dynamic>)['aktifSlider']
+                                        as Map<String, dynamic>)['activeSlider']
                                     ? bgHeader
                                     : merah,
-                                fontWeight: FontWeight.w500),
+                                fontWeight: FontWeight.w500)
                           ),
                           // leading: Container(
                           //   child: Image.network((listData[index].data()

@@ -3,6 +3,7 @@
 // import 'dart:html';
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -11,6 +12,9 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:get/get.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:tokopedia/app/controllers/auth_controller_controller.dart';
+import 'package:tokopedia/app/controllers/produk_controller.dart';
+import 'package:tokopedia/app/controllers/slider_controller.dart';
+import 'package:tokopedia/app/modules/produk/controllers/produk_controller.dart';
 import 'package:tokopedia/app/routes/app_pages.dart';
 import 'package:tokopedia/config/warna.dart';
 
@@ -19,6 +23,8 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   final controller = Get.put(HomeController());
   final authC = Get.put(AuthControllerController());
+  final sliderC = Get.put(SliderController());
+  final controllerProduk = Get.put(PController());
   @override
   Widget build(BuildContext context) {
     double tinggi = MediaQuery.of(context).size.height;
@@ -97,41 +103,48 @@ class HomeView extends GetView<HomeController> {
                     ],
                   ),
                 ),
-                Container(
-                    margin: EdgeInsets.only(top: 16),
-                    child: CarouselSlider(
-                      options: CarouselOptions(
-                        height: 130,
-                        autoPlay: true,
-                        autoPlayCurve: Curves.easeInOutQuart,
-                      ),
-                      items: [
-                        'assets/images/kebut.png',
-                        'assets/images/keju.png',
-                        'assets/images/belanja.png'
-                      ].map((i) {
-                        return Builder(
-                          builder: (BuildContext context) {
-                            return Container(
-                                width: lebar,
-                                margin: EdgeInsets.symmetric(horizontal: 5.0),
-                                decoration: BoxDecoration(
-                                    color: Colors.amber,
-                                    borderRadius:
-                                        BorderRadiusDirectional.circular(8)),
-                                child: Image.asset(
-                                  i,
-                                  fit: BoxFit.fill,
-                                ));
-                          },
-                        );
-                      }).toList(),
-                    )),
+                FutureBuilder<QuerySnapshot<Object?>>(
+                    future: sliderC.getData(),
+                    builder: ((context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        var listData = snapshot.data!.docs;
+
+                        return Container(
+                            margin: EdgeInsets.only(top: 16),
+                            child: CarouselSlider(
+                              options: CarouselOptions(
+                                height: 130,
+                                autoPlay: true,
+                                autoPlayCurve: Curves.easeInOutQuart,
+                              ),
+                              items: listData.map((i) {
+                                return Builder(
+                                  builder: (BuildContext context) {
+                                    return Container(
+                                        width: lebar,
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 5.0),
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey,
+                                            borderRadius:
+                                                BorderRadiusDirectional
+                                                    .circular(8)),
+                                        //  fit: BoxFit.fill,
+                                        child: Image.network((i.data() as Map<
+                                            String, dynamic>)['gambarSlider']));
+                                  },
+                                );
+                              }).toList(),
+                            ));
+                      } else {
+                        return SizedBox();
+                      }
+                    })),
                 Container(
                   margin: EdgeInsets.only(top: 30),
                   child: Wrap(
                     alignment: WrapAlignment.center,
-                    spacing: 13,
+                    spacing: 25,
                     runSpacing: 20,
                     children: [
                       CustomIcon(
@@ -310,13 +323,16 @@ class HomeView extends GetView<HomeController> {
                         ),
                       ),
                       Container(
-                        margin:
-                            EdgeInsets.only(bottom: 20,),
+                        margin: EdgeInsets.only(
+                          bottom: 20,
+                        ),
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
-                               SizedBox(width: 25,),
+                              SizedBox(
+                                width: 25,
+                              ),
                               Row(
                                 children: [
                                   Banner(
@@ -367,15 +383,18 @@ class HomeView extends GetView<HomeController> {
                         ),
                       ),
                       Container(
-                        margin:
-                            EdgeInsets.only(bottom: 20, ),
+                        margin: EdgeInsets.only(
+                          bottom: 20,
+                        ),
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
                               Row(
                                 children: [
-                                  SizedBox(width: 25,),
+                                  SizedBox(
+                                    width: 25,
+                                  ),
                                   Card(
                                       nama: 'Logitech G603 Lightspeed ...',
                                       gambar: 'assets/images/masker.png',
@@ -407,101 +426,71 @@ class HomeView extends GetView<HomeController> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(bottom: 30,top: 30),
+                        margin: EdgeInsets.only(bottom: 30, top: 30),
                         width: lebar,
                         height: 8,
                         color: abu,
                       ),
-                       Container(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    pilihan(
-                        lebar, pilihan1, pilihan2, 'For rizqi', Colors.white),
-                    pilihan(lebar, pilihan3, pilihan4, 'Special Discount',
-                        Colors.transparent),
-                    pilihan(lebar, pilihan5, pilihan6, 'Aktivitasmu',
-                        Colors.transparent),
-                    pilihan(lebar, pilihan7, pilihan8, 'Kesukaanmu',
-                        Colors.transparent),
-                  ],
-                ),
-              ),
-            ),
-             Container(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Wrap(
-                spacing: 3.5,
-                runSpacing: 1,
-                children: [
-                  InkWell(
-                     onTap: () => Get.toNamed(Routes.DETAIL),
-                    child: produk(
-                        lebar,
-                        lebar * 0.42,
-                        tinggi,
-                        'assets/images/mouse4.png',
-                        'Rp 699.000',
-                        '12%',
-                        'Rp 790.000',
-                        'assets/images/mahkota.png',
-                        'Jakarta Pusat'),
-                  ),
-                  produk(
-                      lebar,
-                      lebar * 0.42,
-                      tinggi,
-                      'assets/images/monitor.png',
-                      'Rp 5.949.900',
-                      '44%',
-                      'Rp 1.090.000',
-                      'assets/images/mahkota.png',
-                      'Kota Depok'),
-                  produk(
-                      lebar,
-                      lebar * 0.42,
-                      tinggi,
-                      'assets/images/stopkontak.png',
-                      'Rp 3.750',
-                      '44%',
-                      'Rp 1.090.000',
-                      'assets/images/mahkota.png',
-                      'Kab. Tangerang'),
-                  produk(
-                      lebar,
-                      lebar * 0.42,
-                      tinggi,
-                      'assets/images/mouse5.png',
-                      'Rp 239.000',
-                      '32%',
-                      'Rp 349.000',
-                      'assets/images/mahkota.png',
-                      'Kab. Bandung'),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: tinggi * 0.02,
-            ),
-            Container(
-              width: lebar,
-              height: 40,
-              margin: EdgeInsets.symmetric(horizontal: 15),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  border: Border.all(width: 1, color: abu)),
-              child: Text(
-                'Lihat Selebihnya',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-            ),
-            SizedBox(
-              height: tinggi * 0.02,
-            ),
-
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              pilihan(lebar, pilihan1, pilihan2, 'For rizqi',
+                                  Colors.white),
+                              pilihan(lebar, pilihan3, pilihan4,
+                                  'Special Discount', Colors.transparent),
+                              pilihan(lebar, pilihan5, pilihan6, 'Aktivitasmu',
+                                  Colors.transparent),
+                              pilihan(lebar, pilihan7, pilihan8, 'Kesukaanmu',
+                                  Colors.transparent),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        child: FutureBuilder<QuerySnapshot<Object?>>(
+                          future: controllerProduk.getData(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              var listData = snapshot.data!.docs;
+                              return Wrap(
+                                spacing: 3.5,
+                                runSpacing: 1,
+                                children: List.generate(listData.length
+                                , (index) => produk(lebar, lebar * 0.4, tinggi,listData[index]),
+                              ),);
+                            } else {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: tinggi * 0.02,
+                      ),
+                      Container(
+                        width: lebar,
+                        height: 40,
+                        margin: EdgeInsets.symmetric(horizontal: 15),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(width: 1, color: abu)),
+                        child: Text(
+                          'Lihat Selebihnya',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                      SizedBox(
+                        height: tinggi * 0.02,
+                      ),
                     ],
                   ),
                 ),
@@ -544,7 +533,7 @@ Widget CustomIcon({icon, text}) {
 }
 
 // Widget Pilihan({warna1,warna2}){
-  
+
 // }
 
 Widget pilihan(lebar, warna, warna2, judul, warna3) {
@@ -576,7 +565,6 @@ Widget pilihan(lebar, warna, warna2, judul, warna3) {
     ]),
   );
 }
-
 
 Widget KejarDiskonCard(
     {gambar,
@@ -728,7 +716,7 @@ Widget Card({
   return Container(
     margin: EdgeInsets.only(right: 15),
     width: 146,
-    height: 276,
+    height: 294,
     decoration: BoxDecoration(boxShadow: [
       BoxShadow(color: abuText, blurRadius: 8, offset: Offset(0, 2))
     ], borderRadius: BorderRadius.circular(8), color: Colors.white),
@@ -830,10 +818,9 @@ Widget Card({
   );
 }
 
-Widget produk(lebar, double lebar2, tinggi, gambar, harga, diskonPercen,
-    jumlahDiskon, penjual, asal) {
+Widget produk(lebar, double lebar2, tinggi,data) {
   return Container(
-    height: tinggi * 0.4,
+    height: tinggi * 0.355,
     width: lebar2,
     margin: EdgeInsets.fromLTRB(0, 15, 12, 15),
     decoration: BoxDecoration(
@@ -858,8 +845,8 @@ Widget produk(lebar, double lebar2, tinggi, gambar, harga, diskonPercen,
               topRight: Radius.circular(12),
             ),
             image: DecorationImage(
-                image: AssetImage(
-                  gambar,
+                image: NetworkImage(
+                  (data.data() as Map<String,dynamic>)['gambar'].toString(),
                 ),
                 fit: BoxFit.cover),
           ),
@@ -877,8 +864,16 @@ Widget produk(lebar, double lebar2, tinggi, gambar, harga, diskonPercen,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+               Container(
+                // margin: EdgeInsets.only(bottom: 6),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                        (data.data() as Map<String,dynamic>)['namaBarang'].toString(),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                ),
+              ),
               Text(
-                harga,
+                 (data.data() as Map<String,dynamic>)['hargaAsli'].toString(),
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
               ),
               SizedBox(
@@ -896,7 +891,7 @@ Widget produk(lebar, double lebar2, tinggi, gambar, harga, diskonPercen,
                       color: merahTrans,
                     ),
                     child: Text(
-                      diskonPercen,
+                       (data.data() as Map<String,dynamic>)['diskon'].toString(),
                       style: TextStyle(
                           color: merah,
                           fontWeight: FontWeight.w600,
@@ -904,7 +899,7 @@ Widget produk(lebar, double lebar2, tinggi, gambar, harga, diskonPercen,
                     ),
                   ),
                   Text(
-                    jumlahDiskon,
+                    (data.data() as Map<String,dynamic>)['hargaDiskon'].toString(),
                     style: TextStyle(
                         decoration: TextDecoration.lineThrough,
                         fontSize: 12,
@@ -917,12 +912,12 @@ Widget produk(lebar, double lebar2, tinggi, gambar, harga, diskonPercen,
               ),
               Row(
                 children: [
-                  Image.asset(
-                    penjual,
+                  Image.network(
+                     (data.data() as Map<String,dynamic>)['statusToko'].toString(),
                     width: 15,
                   ),
                   Text(
-                    asal,
+                      (data.data() as Map<String,dynamic>)['alamatPenjual'].toString(),
                     style: TextStyle(
                       color: abuText,
                       fontSize: 13,

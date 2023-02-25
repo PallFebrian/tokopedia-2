@@ -11,58 +11,58 @@ import 'package:tokopedia/app/routes/app_pages.dart';
 import 'package:file_picker/file_picker.dart';
 
 
-class SliderController extends GetxController {
+class PController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   FirebaseStorage storage = FirebaseStorage.instance; 
   String url = "";
   File?path;
 
-  addData(bool aktifSlider, String deskSlider, String gambarSlider) async {
-    CollectionReference slider = firestore.collection('slider');
+//   addData(String alamatPenjual,String deskripsi, int diskon,) async {
+//     CollectionReference slider = firestore.collection('slider');
 
-    final sliderData = {
-      "aktifSlider": aktifSlider,
-      "deskSlider": deskSlider,
-      "gambarSlider": gambarSlider
-    };
+//     final produk = {
+//       "alamatPenjual": alamatPenjual,
+//       "deskSlider": deskSlider,
+//       "gambarSlider": gambarSlider
+//     };
 
-// Add a new document with a generated ID
-    try {
-      await slider.add(sliderData).then((DocumentReference doc) {
-        print('DocumentSnapshot added with ID: ${doc.id}');
-        Get.defaultDialog(title: 'Alert', middleText: 'berhasil menambah data');
-        Get.offNamed(Routes.SLIDER_DATA);
-      });
-    } catch (e) {
-      Get.defaultDialog(title: 'Alert', middleText: 'gagal menambah data');
-    }
-  }
+// // Add a new document with a generated ID
+//     try {
+//       await slider.add(produk).then((DocumentReference doc) {
+//         print('DocumentSnapshot added with ID: ${doc.id}');
+//         Get.defaultDialog(title: 'Alert', middleText: 'berhasil menambah data');
+//         Get.offNamed(Routes.SLIDER_DATA);
+//       });
+//     } catch (e) {
+//       Get.defaultDialog(title: 'Alert', middleText: 'gagal menambah data');
+//     }
+//   }
 
   Future<QuerySnapshot<Object?>> getData() async {
-    CollectionReference slider = firestore.collection('slider');
+    CollectionReference produk = firestore.collection('produk');
 
-    return await slider.get();
+    return await produk.get();
   }
 
-  updateData(String id, bool activeSlider, String deskSlider,
-      String gambarSlider) async {
-    try {
-      final sliderData = {
-        "aktifSlider": activeSlider,
-        "deskSlider": deskSlider,
-        "gambarSlider": gambarSlider
-      };
+  // updateData(String id, bool activeSlider, String deskSlider,
+  //     String gambarSlider) async {
+  //   try {
+  //     final sliderData = {
+  //       "aktifSlider": activeSlider,
+  //       "deskSlider": deskSlider,
+  //       "gambarSlider": gambarSlider
+  //     };
 
-      DocumentReference Slider = firestore.collection('slider').doc(id);
-      await Slider.update(sliderData);
+  //     DocumentReference Slider = firestore.collection('slider').doc(id);
+  //     await Slider.update(sliderData);
 
-      Get.defaultDialog(title: 'Alert', middleText: 'berhasil menupdate data');
-      Get.offNamed(Routes.SLIDER_DATA);
-    } catch (e) {
-      Get.defaultDialog(title: 'Alert', middleText: 'gagal menupdate data');
-      print(e);
-    }
-  }
+  //     Get.defaultDialog(title: 'Alert', middleText: 'berhasil menupdate data');
+  //     Get.offNamed(Routes.SLIDER_DATA);
+  //   } catch (e) {
+  //     Get.defaultDialog(title: 'Alert', middleText: 'gagal menupdate data');
+  //     print(e);
+  //   }
+  // }
 
   deleteData(String id) async {
     try {

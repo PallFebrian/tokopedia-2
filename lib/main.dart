@@ -26,13 +26,14 @@ class MyApp extends StatelessWidget {
         builder: (context, snapshot) {
           // ignore: avoid_print
           print(snapshot.connectionState);
+          
           if (snapshot.connectionState == ConnectionState.active) {
             print(snapshot.data);
             return GetMaterialApp(
               debugShowCheckedModeBanner: false,
               title: "Application",
               initialRoute:
-                  snapshot.data != null && snapshot.data?.emailVerified == true  ? Routes.HOME_ADMIN : Routes.SPLASH_SCREEN,
+                  snapshot.data != null && snapshot.data?.emailVerified == true  ? Routes.HOME : Routes.SPLASH_SCREEN,
               getPages: AppPages.routes,
             );
           } else {

@@ -58,7 +58,7 @@ class HomeAdminView extends GetView<HomeAdminController> {
                         // width: widht,
                         // ignore: prefer_const_constructors
                         child: Text(
-                          'toserba',
+                          'produk',
                           textAlign: TextAlign.center,
                         ),
                       )
