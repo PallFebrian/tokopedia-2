@@ -25,6 +25,7 @@ class HomeView extends GetView<HomeController> {
   final authC = Get.put(AuthControllerController());
   final sliderC = Get.put(SliderController());
   final controllerProduk = Get.put(PController());
+
   @override
   Widget build(BuildContext context) {
     double tinggi = MediaQuery.of(context).size.height;
@@ -270,27 +271,198 @@ class HomeView extends GetView<HomeController> {
                                 child: Image.asset(
                                     'assets/images/kejarDiskon.png'),
                               ),
-                              Row(
-                                children: [
-                                  KejarDiskonCard(
-                                      gambar: 'assets/images/masker.png',
-                                      daerah: 'Kab. Bandung',
-                                      diskon: '92%',
-                                      harga: 'Rp 1.000',
-                                      totalPersen: 100,
-                                      currentPersen: 80,
-                                      potongan: 'Rp 12.546',
-                                      status: 'Segera Habis'),
-                                  KejarDiskonCard(
-                                      gambar: 'assets/images/colokan.png',
-                                      daerah: 'Jakarta Timur',
-                                      diskon: '6%',
-                                      harga: 'Rp 103.000',
-                                      totalPersen: 100,
-                                      currentPersen: 35,
-                                      potongan: 'Rp 109.900',
-                                      status: 'Tersedia')
-                                ],
+                              //          FutureBuilder<QuerySnapshot<Object>>(
+                              //   future: controllerProduk.getDataDiskon() ,
+                              // ),
+                              FutureBuilder<QuerySnapshot<Object?>>(
+                                future: controllerProduk.getDataDiskon(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    var dataPromo = snapshot.data!.docs;
+                                    return Container(
+                                      // margin: EdgeInsets.only(left: 15),
+                                      // padding: EdgeInsets.fromLTRB(20, 10, 30, 20),
+
+                                      child: Row(
+                                        children: List.generate(
+                                            dataPromo.length, (index) {
+                                          return InkWell(
+                                            onTap: () => Get.toNamed(
+                                                Routes.DETAIL,
+                                                arguments: dataPromo[index].data()),
+                                            child: Container(
+                                              margin: EdgeInsets.fromLTRB(
+                                                  30, 10, 0, 10),
+                                              width: 200,
+                                              height: 318,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    // margin: EdgeInsets.fromLTRB(10, 0, 10, 5),
+                                                    // padding: EdgeInsets.fromLTRB(left, top, right, bottom),
+                                                    width: 190,
+                                                    height: 160,
+                                                    child: Image.network(
+                                                      (dataPromo[index].data()
+                                                                  as Map<String,
+                                                                      dynamic>)[
+                                                              "gambar"]
+                                                          .toString(),
+                                                      // fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.fromLTRB(
+                                                      10,
+                                                      10,
+                                                      0,
+                                                      0,
+                                                    ),
+                                                    child: Text(
+                                                      (dataPromo[index].data()
+                                                                  as Map<String,
+                                                                      dynamic>)[
+                                                              "namaBarang"]
+                                                          .toString(),
+                                                      // fit: BoxFit.cover,
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 15),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.fromLTRB(
+                                                      10,
+                                                      10,
+                                                      0,
+                                                      0,
+                                                    ),
+                                                    child: Text(
+                                                      (dataPromo[index].data()
+                                                                  as Map<String,
+                                                                      dynamic>)[
+                                                              "hargaDiskon"]
+                                                          .toString(),
+                                                      // fit: BoxFit.cover,
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 15),
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        padding:
+                                                            EdgeInsets.all(2),
+                                                        margin:
+                                                            EdgeInsets.fromLTRB(
+                                                                10, 5, 0, 0),
+                                                        width: 30,
+                                                        height: 20,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                color: bgRedB),
+                                                        child: Text(
+                                                          (dataPromo[index]
+                                                                          .data()
+                                                                      as Map<
+                                                                          String,
+                                                                          dynamic>)[
+                                                                  "diskon"]
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              color: bgRed),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        margin:
+                                                            EdgeInsets.fromLTRB(
+                                                                5, 5, 0, 0),
+                                                        child: Text(
+                                                        (dataPromo[index].data()
+                                                                  as Map<String,
+                                                                      dynamic>)[
+                                                              "hargaAsli"]
+                                                          .toString(),
+                                                          style: TextStyle(
+                                                              color: subjudul,
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .lineThrough),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        margin:
+                                                            EdgeInsets.fromLTRB(
+                                                                10, 5, 0, 0),
+                                                        child: Image.asset(
+                                                            "assets/images/os.png"),
+                                                      ),
+                                                      Container(
+                                                        margin:
+                                                            EdgeInsets.fromLTRB(
+                                                                5, 5, 0, 0),
+                                                        child: Text(
+                                                          "Kab. Tangerang",
+                                                          style: TextStyle(
+                                                              color: subjudul),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Container(
+                                                    // margin: EdgeInsets.only(bottom: 10, top: 10),
+                                                    // padding: EdgeInsets.fromLTRB(left, top, right, bottom),
+
+                                                    margin: EdgeInsets.fromLTRB(
+                                                        5, 10, 5, 0),
+                                                    child:
+                                                        StepProgressIndicator(
+                                                      totalSteps: 100,
+                                                      currentStep: 80,
+                                                      size: 5,
+                                                      padding: 0,
+                                                      selectedColor: bgRed,
+                                                      unselectedColor:
+                                                          Color(0xffeeeeee),
+                                                      roundedEdges:
+                                                          Radius.circular(2),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        top: 15, left: 10),
+                                                    child: Text(
+                                                      "Segera Habis",
+                                                      style: TextStyle(
+                                                          color: subjudul),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        }),
+                                      ),
+                                    );
+                                  } else {
+                                    return SizedBox();
+                                  }
+                                },
                               )
                             ],
                           ),
@@ -460,9 +632,12 @@ class HomeView extends GetView<HomeController> {
                               return Wrap(
                                 spacing: 3.5,
                                 runSpacing: 1,
-                                children: List.generate(listData.length
-                                , (index) => produk(lebar, lebar * 0.4, tinggi,listData[index]),
-                              ),);
+                                children: List.generate(
+                                  listData.length,
+                                  (index) => produk(lebar, lebar * 0.4, tinggi,
+                                      listData[index]),
+                                ),
+                              );
                             } else {
                               return Center(
                                 child: CircularProgressIndicator(),
@@ -818,7 +993,7 @@ Widget Card({
   );
 }
 
-Widget produk(lebar, double lebar2, tinggi,data) {
+Widget produk(lebar, double lebar2, tinggi, data) {
   return Container(
     height: tinggi * 0.355,
     width: lebar2,
@@ -846,7 +1021,7 @@ Widget produk(lebar, double lebar2, tinggi,data) {
             ),
             image: DecorationImage(
                 image: NetworkImage(
-                  (data.data() as Map<String,dynamic>)['gambar'].toString(),
+                  (data.data() as Map<String, dynamic>)['gambar'].toString(),
                 ),
                 fit: BoxFit.cover),
           ),
@@ -864,16 +1039,17 @@ Widget produk(lebar, double lebar2, tinggi,data) {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               Container(
+              Container(
                 // margin: EdgeInsets.only(bottom: 6),
                 alignment: Alignment.centerLeft,
                 child: Text(
-                        (data.data() as Map<String,dynamic>)['namaBarang'].toString(),
+                  (data.data() as Map<String, dynamic>)['namaBarang']
+                      .toString(),
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                 ),
               ),
               Text(
-                 (data.data() as Map<String,dynamic>)['hargaAsli'].toString(),
+                (data.data() as Map<String, dynamic>)['hargaAsli'].toString(),
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
               ),
               SizedBox(
@@ -891,7 +1067,8 @@ Widget produk(lebar, double lebar2, tinggi,data) {
                       color: merahTrans,
                     ),
                     child: Text(
-                       (data.data() as Map<String,dynamic>)['diskon'].toString(),
+                      (data.data() as Map<String, dynamic>)['diskon']
+                          .toString(),
                       style: TextStyle(
                           color: merah,
                           fontWeight: FontWeight.w600,
@@ -899,7 +1076,8 @@ Widget produk(lebar, double lebar2, tinggi,data) {
                     ),
                   ),
                   Text(
-                    (data.data() as Map<String,dynamic>)['hargaDiskon'].toString(),
+                    (data.data() as Map<String, dynamic>)['hargaDiskon']
+                        .toString(),
                     style: TextStyle(
                         decoration: TextDecoration.lineThrough,
                         fontSize: 12,
@@ -913,11 +1091,13 @@ Widget produk(lebar, double lebar2, tinggi,data) {
               Row(
                 children: [
                   Image.network(
-                     (data.data() as Map<String,dynamic>)['statusToko'].toString(),
+                    (data.data() as Map<String, dynamic>)['statusToko']
+                        .toString(),
                     width: 15,
                   ),
                   Text(
-                      (data.data() as Map<String,dynamic>)['alamatPenjual'].toString(),
+                    (data.data() as Map<String, dynamic>)['alamatPenjual']
+                        .toString(),
                     style: TextStyle(
                       color: abuText,
                       fontSize: 13,

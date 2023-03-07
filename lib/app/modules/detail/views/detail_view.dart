@@ -1,18 +1,24 @@
 // ignore_for_file: avoid_unnecessary_containers, sized_box_for_whitespace
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:tokopedia/app/modules/produk/controllers/produk_controller.dart';
 import 'package:tokopedia/config/warna.dart';
 
 import '../controllers/detail_controller.dart';
 
 class DetailView extends GetView<DetailController> {
-  const DetailView({Key? key}) : super(key: key);
+  final data = Get.arguments; 
+
   @override
   Widget build(BuildContext context) {
     double tinggi = MediaQuery.of(context).size.height;
     double lebar = MediaQuery.of(context).size.width;
+    String gambarP = (data as Map<String, dynamic>)["gambar"];
+    int hargaP = (data as Map<String, dynamic>)["hargaDiskon"];
+    String namaBarang =(data as Map<String, dynamic>)["namaBarang"];
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -97,7 +103,7 @@ class DetailView extends GetView<DetailController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset('assets/images/detail.png'),
+                        Image.network(gambarP),
                       ],
                     )),
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -112,9 +118,8 @@ class DetailView extends GetView<DetailController> {
                           children: [
                             Container(
                               // alignment: Alignment.centerLeft,
-                              // ignore: prefer_const_constructors
                               child: Text(
-                                'Rp370.000',
+                               hargaP.toString() ,
                                 // ignore: prefer_const_constructors
                                 style: TextStyle(
                                     color: item,
@@ -131,8 +136,8 @@ class DetailView extends GetView<DetailController> {
                       ),
                       Container(
                         margin: const EdgeInsets.only(bottom: 20),
-                        child: const Text(
-                          'Mine. Perfumery ETHEREAL - 50ml Eau De Parfum',
+                        child:  Text(
+                          namaBarang,
                           style: TextStyle(color: gaItem2, fontSize: 19),
                         ),
                       ),
@@ -513,326 +518,340 @@ class DetailView extends GetView<DetailController> {
                     children: [
                       Container(
                         margin: EdgeInsets.only(left: 20),
-                        child: Icon(Icons.star_rounded,color: star,size: 25,),
+                        child: Icon(
+                          Icons.star_rounded,
+                          color: star,
+                          size: 25,
+                        ),
                       ),
-                     Container(
-                       margin: EdgeInsets.only(right: 15),
-                      child:  Text("4.9",style: TextStyle(color: item,fontWeight: FontWeight.w600,fontSize: 22),),
-                     ),
-                      Text("320 rating ∙ 102 ulasan",style: TextStyle(color: abuText,fontSize: 16),)
+                      Container(
+                        margin: EdgeInsets.only(right: 15),
+                        child: Text(
+                          "4.9",
+                          style: TextStyle(
+                              color: item,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 22),
+                        ),
+                      ),
+                      Text(
+                        "320 rating ∙ 102 ulasan",
+                        style: TextStyle(color: abuText, fontSize: 16),
+                      )
                     ],
                   ),
                 ),
                 Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    review('assets/images/mw1.png', ''),
-                    review('assets/images/mw2.png', ''),
-                    review('assets/images/mw3.png', ''),
-                    review('assets/images/mw4.png', ''),
-                    review('assets/images/mw5.png', ''),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: tinggi * 0.02,
-              ),
-              /////////////////////////////////////////////////////////////////////
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Divider(
-                  thickness: 1,
-                  color: abu,
-                ),
-              ),
-              SizedBox(
-                height: tinggi * 0.02,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(right: 12),
-                      child: Image.asset('assets/images/orang.png'),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Zain Ekstrom Bothman',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        Text(
-                          '31 ulasan lengkap ∙ 17 terbantu',
-                          style: TextStyle(color: abuText),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: tinggi * 0.01,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.star,
-                          color: star,
-                          size: 15,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: star,
-                          size: 15,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: star,
-                          size: 15,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: star,
-                          size: 15,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: star,
-                          size: 15,
-                        ),
-                      ],
-                    ),
-                    Container(
-                        margin: EdgeInsets.only(left: 7),
-                        child: Text(
-                          '10 bulan lalu',
-                          style: TextStyle(color: abuText),
-                        ))
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: tinggi * 0.01,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                // ignore: prefer_const_constructors
-                child: Text(
-                  'saya selalu tertarik dengan produk lokal, buat saya aroma nomor 2 karena subyektif, Kemasan nomor selanjutnya, tapi yang perlu di',
-                  style: TextStyle(fontSize: 15),
-                ),
-              ),
-              SizedBox(
-                height: tinggi * 0.01,
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Text(
-                  'Baca Selengkapnya',
-                  style: TextStyle(
-                    color: bgLogin,
-                    fontWeight: FontWeight.w600,
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      review('assets/images/mw1.png', ''),
+                      review('assets/images/mw2.png', ''),
+                      review('assets/images/mw3.png', ''),
+                      review('assets/images/mw4.png', ''),
+                      review('assets/images/mw5.png', ''),
+                    ],
                   ),
                 ),
-              ),
-              SizedBox(
-                height: tinggi * 0.02,
-              ),
-              pembatas(lebar),
-              SizedBox(
-                height: tinggi * 0.02,
-              ),
-              heading2('Diskusi'),
-              SizedBox(
-                height: tinggi * 0.02,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  children: [
-                    Image.asset('assets/images/orang2.png'),
-                    Container(
-                      padding: EdgeInsets.only(left: 12),
-                      child: Row(
+                SizedBox(
+                  height: tinggi * 0.02,
+                ),
+                /////////////////////////////////////////////////////////////////////
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Divider(
+                    thickness: 1,
+                    color: abu,
+                  ),
+                ),
+                SizedBox(
+                  height: tinggi * 0.02,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: 12),
+                        child: Image.asset('assets/images/orang.png'),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Rayna Stanton',
+                            'Zain Ekstrom Bothman',
                             style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                color: abuText,
-                                fontSize: 15),
+                                color: Colors.black,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600),
                           ),
                           Text(
-                            ' ∙ Apr 2022',
+                            '31 ulasan lengkap ∙ 17 terbantu',
                             style: TextStyle(color: abuText),
                           ),
                         ],
-                      ),
-                    ),
-                  ],
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: tinggi * 0.01,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Text(
-                  'hai! kira-kira kapan restock lagi? thanks in      advance',
-                  style: TextStyle(fontSize: 15),
+                SizedBox(
+                  height: tinggi * 0.01,
                 ),
-              ),
-              SizedBox(
-                height: tinggi * 0.01,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 40),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Image.asset('assets/images/penjual1.png'),
-                        Container(
-                            width: 60,
-                            height: 25,
-                            margin: EdgeInsets.only(left: 12),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6),
-                              color: ijoTrans,
-                            ),
-                            child: Text(
-                              'Penjual',
-                              style: TextStyle(
-                                  color: bgLogin, fontWeight: FontWeight.w600),
-                            )),
-                        Text(
-                          '∙ Apr 2022',
-                          style: TextStyle(color: abuText),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: tinggi * 0.01,
-                    ),
-                    Text(
-                      'Halo kak, maaf banget yak karena kamu jadi nunggu saat ini kita masih out of stock ya ...',
-                      style: TextStyle(color: abuText, fontSize: 14.3),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: tinggi * 0.02,
-              ),
-              pembatas(lebar),
-              SizedBox(
-                height: tinggi * 0.02,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 20,
-                      height: 20,
-                      margin: EdgeInsets.only(right: 14),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 2, color: abuText),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: Text(
-                        '!',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, color: abuText),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Produk bermasalah? ',
-                          style: TextStyle(color: abuText),
-                        ),
-                        Text(
-                          'Laporkan',
-                          style: TextStyle(
-                            color: bgLogin,
-                            fontWeight: FontWeight.w500,
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.star,
+                            color: star,
+                            size: 15,
                           ),
-                        ),
-                      ],
-                    )
-                  ],
+                          Icon(
+                            Icons.star,
+                            color: star,
+                            size: 15,
+                          ),
+                          Icon(
+                            Icons.star,
+                            color: star,
+                            size: 15,
+                          ),
+                          Icon(
+                            Icons.star,
+                            color: star,
+                            size: 15,
+                          ),
+                          Icon(
+                            Icons.star,
+                            color: star,
+                            size: 15,
+                          ),
+                        ],
+                      ),
+                      Container(
+                          margin: EdgeInsets.only(left: 7),
+                          child: Text(
+                            '10 bulan lalu',
+                            style: TextStyle(color: abuText),
+                          ))
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: tinggi * 0.02,
-              ),
-              Container(
-                width: lebar,
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                decoration: BoxDecoration(
-                    border: Border(top: BorderSide(width: 1.5, color: abu))),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                SizedBox(
+                  height: tinggi * 0.01,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  // ignore: prefer_const_constructors
+                  child: Text(
+                    'saya selalu tertarik dengan produk lokal, buat saya aroma nomor 2 karena subyektif, Kemasan nomor selanjutnya, tapi yang perlu di',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
+                SizedBox(
+                  height: tinggi * 0.01,
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    'Baca Selengkapnya',
+                    style: TextStyle(
+                      color: bgLogin,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: tinggi * 0.02,
+                ),
+                pembatas(lebar),
+                SizedBox(
+                  height: tinggi * 0.02,
+                ),
+                heading2('Diskusi'),
+                SizedBox(
+                  height: tinggi * 0.02,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
+                    children: [
+                      Image.asset('assets/images/orang2.png'),
+                      Container(
+                        padding: EdgeInsets.only(left: 12),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Rayna Stanton',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: abuText,
+                                  fontSize: 15),
+                            ),
+                            Text(
+                              ' ∙ Apr 2022',
+                              style: TextStyle(color: abuText),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: tinggi * 0.01,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    'hai! kira-kira kapan restock lagi? thanks in      advance',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
+                SizedBox(
+                  height: tinggi * 0.01,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset('assets/images/penjual1.png'),
+                          Container(
+                              width: 60,
+                              height: 25,
+                              margin: EdgeInsets.only(left: 12),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6),
+                                color: ijoTrans,
+                              ),
+                              child: Text(
+                                'Penjual',
+                                style: TextStyle(
+                                    color: bgLogin,
+                                    fontWeight: FontWeight.w600),
+                              )),
+                          Text(
+                            '∙ Apr 2022',
+                            style: TextStyle(color: abuText),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: tinggi * 0.01,
+                      ),
+                      Text(
+                        'Halo kak, maaf banget yak karena kamu jadi nunggu saat ini kita masih out of stock ya ...',
+                        style: TextStyle(color: abuText, fontSize: 14.3),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: tinggi * 0.02,
+                ),
+                pembatas(lebar),
+                SizedBox(
+                  height: tinggi * 0.02,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
                     children: [
                       Container(
-                        width: 45,
-                        height: 45,
+                        width: 20,
+                        height: 20,
+                        margin: EdgeInsets.only(right: 14),
+                        alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          border: Border.all(width: 1.5, color: abu),
-                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(width: 2, color: abuText),
+                          borderRadius: BorderRadius.circular(50),
                         ),
-                        child: Icon(
-                          Icons.chat,
-                          size: 26,
+                        child: Text(
+                          '!',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, color: abuText),
                         ),
                       ),
-                      Container(
-                          width: lebar * 0.375,
+                      Row(
+                        children: [
+                          Text(
+                            'Produk bermasalah? ',
+                            style: TextStyle(color: abuText),
+                          ),
+                          Text(
+                            'Laporkan',
+                            style: TextStyle(
+                              color: bgLogin,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: tinggi * 0.02,
+                ),
+                Container(
+                  width: lebar,
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  decoration: BoxDecoration(
+                      border: Border(top: BorderSide(width: 1.5, color: abu))),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: 45,
                           height: 45,
-                          alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            border: Border.all(width: 1.5, color: bgLogin),
+                            border: Border.all(width: 1.5, color: abu),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Text(
-                            'Beli Langsung',
-                            style: TextStyle(
-                                color: bgLogin,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15),
-                          )),
-                      Container(
-                          width: lebar * 0.375,
-                          height: 45,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: bgLogin,
-                            borderRadius: BorderRadius.circular(8),
+                          child: Icon(
+                            Icons.chat,
+                            size: 26,
                           ),
-                          child: Text(
-                            '+Keranjang',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15),
-                          )),
-                    ]),
-              )
+                        ),
+                        Container(
+                            width: lebar * 0.375,
+                            height: 45,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 1.5, color: bgLogin),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              'Beli Langsung',
+                              style: TextStyle(
+                                  color: bgLogin,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15),
+                            )),
+                        Container(
+                            width: lebar * 0.375,
+                            height: 45,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: bgLogin,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              '+Keranjang',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15),
+                            )),
+                      ]),
+                )
               ],
             ),
           ),
@@ -872,7 +891,6 @@ Widget pembatas(lebar) {
     color: abu,
   );
 }
-
 
 Widget Card({
   nama,
@@ -973,7 +991,6 @@ Widget Card({
     ),
   );
 }
-
 
 Widget review(gambar, judul) {
   return Container(

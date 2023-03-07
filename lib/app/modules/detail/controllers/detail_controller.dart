@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class DetailController extends GetxController {
-  //TODO: Implement DetailController
+  RxString namaProduct = "".obs;
 
   final count = 0.obs;
   @override
@@ -20,4 +20,6 @@ class DetailController extends GetxController {
   }
 
   void increment() => count.value++;
+
+
 }

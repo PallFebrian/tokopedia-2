@@ -2,14 +2,15 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:tokopedia/app/controllers/produk_controller.dart';
+import 'package:tokopedia/app/modules/produk/controllers/produk_controller.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
-
   final count = 0.obs;
   TextEditingController signOut = TextEditingController();
   @override
   void onInit() {
+    PController().filterData();
     super.onInit();
   }
 

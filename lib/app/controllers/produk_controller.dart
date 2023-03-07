@@ -10,12 +10,11 @@ import 'package:get/get.dart';
 import 'package:tokopedia/app/routes/app_pages.dart';
 import 'package:file_picker/file_picker.dart';
 
-
 class PController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  FirebaseStorage storage = FirebaseStorage.instance; 
+  FirebaseStorage storage = FirebaseStorage.instance;
   String url = "";
-  File?path;
+  File? path;
 
 //   addData(String alamatPenjual,String deskripsi, int diskon,) async {
 //     CollectionReference slider = firestore.collection('slider');
@@ -44,58 +43,33 @@ class PController extends GetxController {
     return await produk.get();
   }
 
-  // updateData(String id, bool activeSlider, String deskSlider,
-  //     String gambarSlider) async {
-  //   try {
-  //     final sliderData = {
-  //       "aktifSlider": activeSlider,
-  //       "deskSlider": deskSlider,
-  //       "gambarSlider": gambarSlider
-  //     };
+  filterData() async {
+    final result = await firestore
+        .collection('produk')
+        // .where('hargaAsli2', isGreaterThan: 150000)
+        // .orderBy('hargaAsli',descending: true)//dari mahal ke kecil
+        // .limitToLast(5)
+        .where('flashSale',isEqualTo: true)
+        .get();
+    print(result.docs.length);
+    print('******************************');
 
-  //     DocumentReference Slider = firestore.collection('slider').doc(id);
-  //     await Slider.update(sliderData);
-
-  //     Get.defaultDialog(title: 'Alert', middleText: 'berhasil menupdate data');
-  //     Get.offNamed(Routes.SLIDER_DATA);
-  //   } catch (e) {
-  //     Get.defaultDialog(title: 'Alert', middleText: 'gagal menupdate data');
-  //     print(e);
-  //   }
-  // }
-
-  deleteData(String id) async {
-    try {
-      DocumentReference Slider = firestore.collection('slider').doc(id);
-      await Slider.delete();
-      Get.defaultDialog(title: 'Alert', middleText: 'berhasil mendelete data');
-      return Get.offAllNamed(Routes.SLIDER_DATA);
-    } catch (e) {
-      Get.defaultDialog(title: 'Alert', middleText: 'gagal mendelete data');
-      print(e);
+    if (result.docs.length > 0) {
+      result.docs.forEach((element) {
+        print(element.data());
+      });
+    } else {
+      print('tidak ada');
     }
   }
+  Future<QuerySnapshot<Object?>> getDataDiskon() async {
+    
+    CollectionReference produk = firestore.collection("produk");
 
-  addPhoto() async{
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
-
-    if (result != null){
-      File file = File(result.files.single.path!);
-      String namaFile = result.files.first.name;
-      url = namaFile;
-      path = file;
-
-      try {
-        await storage.ref('${namaFile}').putFile(file);
-        final data = await storage.ref('${namaFile}').getDownloadURL();
-
-        url = data;
-        return data;
-      } catch (e) {
-           Get.defaultDialog(title: 'Alert', middleText: 'gagal mengupload data');
-      }
-    }else{
-      print('tidak memilki file');
-    }
+    return await produk.where('flashSale', isEqualTo: true).get();
   }
+  
 }
+
+ 
+  
